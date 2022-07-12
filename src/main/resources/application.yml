@@ -1,0 +1,25 @@
+server:
+  port: 8081
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.application.name}:8761/eureka/
+
+spring:
+  application:
+    name: eureka-client
+
+  data:
+    mongodb:
+      database: ClientAFP
+      host: localhost
+      port: 27017
+
+  cloud:
+    gateway:
+      routes:
+        -id: client1
+        uri: lb://first-service
+        predicates:
+          - Path=/api/client/**
